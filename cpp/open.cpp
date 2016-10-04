@@ -11,7 +11,7 @@ int main(const int argc, const char * argv []) {
 
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " FILE" << endl;
-    exit(0);
+    exit(EXIT_FAILURE);
   } // if
 
   const char * filename = argv[1];

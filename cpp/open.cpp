@@ -1,10 +1,7 @@
-
 #include <iostream>
 #include <cstdlib>
-#include <cerrno>
 #include <cstring>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <cerrno>
 #include <fcntl.h>
 
 using std::cout;
@@ -12,12 +9,26 @@ using std::endl;
 
 int main(const int argc, const char * argv []) {
 
-  const char * filename = argv[1];
-  int fd = -1;
+  if (argc != 2) {
+    cout << "Usage: " << argv[0] << " FILE" << endl;
+    exit(EXIT_FAILURE);
+  } // if
 
-  fd = open(filename, O_RDONLY | O_CREAT, 0777);
-  cout << "fd = " << fd << " "
-       << "strerror = " << strerror(errno) << endl;
+  const char * filename = argv[1];
+  int fd = open(filename, O_RDONLY);
+
+  if (fd != -1) {
+    cout << "Opened " << filename << "; "
+	 << "fd = " << fd << "; "
+	 << "error = " << strerror(errno) 
+	 << endl;
+  } else {
+    cout << "Could not open " << filename << "; "
+	 << "fd = " << fd  << " (should be -1); "
+	 << "error = " << strerror(errno) 
+	 << endl;
+    exit(EXIT_FAILURE);
+  } // if
   
   return EXIT_SUCCESS;
 } // main

@@ -28,7 +28,7 @@ int main(const int argc, const char * argv []) {
 	 << "fd = " << fd  << " (should be -1); "
 	 << "error = " << strerror(errno) 
 	 << endl;
-    exit(EXIT_FAILURE);
+    //exit(EXIT_FAILURE);
   } // if
 
   int cfd = close(fd);

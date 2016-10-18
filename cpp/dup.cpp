@@ -27,22 +27,33 @@ int main(const int argc, const char * argv []) {
   } // if
 
   const char * filename = argv[1];
-  int ofd, cfd;
+  int backup, ofd, cfd;
 
-  umask(0); // TODO error checking
+  // backup standard output
+  if ((backup = dup(STDOUT_FILENO)) == -1) nope_out("dup");
+
+  // set user file creation mask
+  umask(0); // always succeeds! (see umask(2))
+  
   if ((ofd = open(filename, O_WRONLY | O_CREAT, 0666)) == -1) {
     nope_out("open");
   } // if
 
+  // print to screen
   cout << "before dup2" << endl;
 
-  int backup = dup(STDOUT_FILENO); // TODO error checking
-  dup2(ofd, STDOUT_FILENO); // TODO error checking
+  // duplicate ofd into standard output;
+  // standard out will become a duplicate of ofd
+  if (dup2(ofd, STDOUT_FILENO) == -1) nope_out("dup2");
 
+  // print to ofd's file
   cout << "after dup2" << endl;
-  
-  dup2(backup, STDOUT_FILENO); // TODO error checking
 
+  // duplicate backup into standard output;
+  // standard out will become a duplicate of backup
+  if (dup2(backup, STDOUT_FILENO) == -1) nope_out("dup2"); 
+
+  // print to screen
   cout << "back to normal" << endl;
   
   if ((cfd = close(ofd)) == -1) {

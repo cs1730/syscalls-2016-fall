@@ -24,6 +24,7 @@ int main(const int argc, const char * argv []) {
     exit(EXIT_FAILURE);
   } // if
 
+  // isolate permission bits with mask 07777 = 0b111'111'111'111
   mode_t perms = buffer.st_mode & 07777;
 
   cout << "S_ISUID 4000 " << ((perms & S_ISUID) ? "*": "") << endl;

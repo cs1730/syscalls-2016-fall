@@ -28,8 +28,8 @@ int main(int argc, const char * argv[]) {
   int jday = (tm.tm_wday + 4) % 7;      // num days since SUN (Julian)
 
   cout << "     Date: " << date << endl;
-  cout << "Gregorian: " << gday << " (" << *(days + gday) << ")" << endl; 
-  cout << "   Julian: " << jday << " (" << *(days + jday) << ")" << endl;
+  cout << "Gregorian: " << gday << " (" << days[gday] << ")" << endl; 
+  cout << "   Julian: " << jday << " (" << days[jday] << ")" << endl;
   
   return EXIT_SUCCESS;
     

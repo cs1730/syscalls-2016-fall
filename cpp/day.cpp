@@ -1,8 +1,8 @@
 
 /*! 
  *  \author    Michael E. Cotterell <mepcott@uga.edu>
- *  \date      2016
- *  \warning   May only work properly on Linux systems.
+ *  \date      2016-10-18
+ *  \warning   Requires strptime(3).
  */
 
 #include <iostream>

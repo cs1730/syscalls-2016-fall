@@ -9,7 +9,7 @@
  *
  *  \author    Michael E. Cotterell <mepcott@uga.edu>
  *  \date      2016-10-18
- *  \warning   Requires strptime(3).
+ *  \warning   Requires strptime(3) from Linux glibc.
  */
 
 #include <iostream>

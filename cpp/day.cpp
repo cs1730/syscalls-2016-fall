@@ -2,7 +2,8 @@
 /*! 
  *  \author    Michael E. Cotterell <mepcott@uga.edu>
  *  \date      2016
- *  \warning   May only work properly on Linux systems
+ *  \warning   May only work properly on Linux systems.
+ *  \warning   May only work for the Gregorian calendar.
  */
 
 #include <iostream>
@@ -18,7 +19,7 @@ int main(int argc, const char * argv[]) {
   char date [11];                       // date string
     
   char y [] = "2016";                   // year as C string
-  char m [] = "10";                     // month as C string
+  char m [] = "01";                     // month as C string
   char d [] = "01";                     // day as C string
 
   sprintf(date, "%s-%s-%s", y, m, d);   // create date string

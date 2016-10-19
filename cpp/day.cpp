@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     
   char y [] = "2016";                   // year as C string
   char m [] = "10";                     // month as C string
-  char d [] = "01";
+  char d [] = "01";                     // day as C string
 
   sprintf(date, "%s-%s-%s", y, m, d);   // create date string
   strptime(date, "%Y-%m-%d", &tm);      // extract tm structure

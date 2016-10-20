@@ -1,4 +1,16 @@
 
+/*!
+ *    _________               /\  
+ *   /   _____/__ ____________)/  
+ *   \_____  \|  |  \____ \__  \  
+ *   /        \  |  /  |_> > __ \_
+ *  /_______  /____/|   __(____  /
+ *          \/      |__|       \/  
+ *
+ *  \author    Michael E. Cotterell <mepcott@uga.edu>
+ *  \date      2016-10-30
+ */
+
 #include <ios>
 #include <iostream>
 #include <cstdlib>

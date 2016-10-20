@@ -6,14 +6,14 @@
 using std::cout;
 using std::endl;
 
-extern char ** environ;
+extern const char ** environ;
 
 int main(const int argc, const char * argv []) {
   
   // turn off buffering for cout
   cout.setf(std::ios::unitbuf);
 
-  for (char ** env = environ; *env != nullptr; ++env) {
+  for (const char ** env = environ; *env != nullptr; ++env) {
     cout << *env << endl;
   } // for
 

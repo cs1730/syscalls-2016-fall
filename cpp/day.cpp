@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
 
   int y = atoi(argv[1]);                // year as C string
   int m = atoi(argv[2]);                // month as C string
-  int d = atoi(argv[2]);                // day as C string
+  int d = atoi(argv[3]);                // day as C string
 
   int gday = gregorian_day(y, m, d);    // num days since SUN (Gregorian)
   int jday = julian_day(y, m, d);       // num days since SUN (Julian)

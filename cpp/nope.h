@@ -28,12 +28,9 @@ using std::string;
  * @param term    terminate if true
  * @param errnum  custom errno value
  */
-void nope_out(const string & prefix = "", bool term = true, int errnum = errno) {
-  if (prefix == "") {
-    fprintf(stderr, "%s\n", strerror(errnum));
-  } else {
-    fprintf(stderr, "%s: %s\n", prefix.c_str(), strerror(errnum));
-  } // if
+inline void nope_out(const string & prefix = "", bool term = true, int errnum = errno) {
+  if (prefix == "") fprintf(stderr, "%s\n", strerror(errnum));
+  else              fprintf(stderr, "%s: %s\n", prefix.c_str(), strerror(errnum));
   if (term) exit(EXIT_FAILURE);
 } // nope_out
 

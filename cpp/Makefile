@@ -28,7 +28,7 @@ EXE=$(OBJ:%.o=%)
 
 all: $(EXE)
 
-$(filter %.o, $(OBJ)): %.o: %.cpp
+$(filter %.o, $(OBJ)): %.o: %.cpp nope.h
 	$(COMPILE) $<
 
 $(filter %, $(EXE)): %: %.o

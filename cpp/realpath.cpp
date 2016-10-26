@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <climits>
 #include <cstdlib>
 
 using namespace std;

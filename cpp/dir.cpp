@@ -5,12 +5,11 @@
 #include <cstdlib>
 #include <sys/types.h>
 #include <dirent.h>
+#include "nope.h"
 
 using std::cout;
 using std::endl;
 using std::string;
-
-void nope_out(const string & prefix);
 
 int main(const int argc, const char * argv []) {
 
@@ -38,9 +37,4 @@ int main(const int argc, const char * argv []) {
   return EXIT_SUCCESS;
   
 } // main
-
-void nope_out(const string & prefix) {
-  perror(prefix.c_str());
-  // exit(EXIT_FAILURE);
-} // nope_out
 

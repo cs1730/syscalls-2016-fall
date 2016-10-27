@@ -27,6 +27,17 @@ int main(const int argc, const char * argv []) {
   // isolate permission bits with mask 07777 = 0b111'111'111'111
   mode_t perms = buffer.st_mode & 07777;
 
+  switch (buffer.st_mode & S_IFMT) {
+  case S_IFSOCK: cout << "socket"           << endl; break;
+  case S_IFLNK:  cout << "symbolic link"    << endl; break;
+  case S_IFREG:  cout << "regular file"     << endl; break;
+  case S_IFBLK:  cout << "block device"     << endl; break;
+  case S_IFDIR:  cout << "directory"        << endl; break;
+  case S_IFCHR:  cout << "character device" << endl; break;
+  case S_IFIFO:  cout << "FIFO"             << endl; break;
+  default:       cout << "unkown type"      << endl; break;
+  } // switch
+  
   cout << "S_ISUID 4000 " << ((perms & S_ISUID) ? "*": "") << endl;
   cout << "S_ISGID 2000 " << ((perms & S_ISGID) ? "*": "") << endl;
   cout << "S_ISVTX 1000 " << ((perms & S_ISVTX) ? "*": "") << endl;
@@ -43,7 +54,7 @@ int main(const int argc, const char * argv []) {
        << oct << setw(4) << setfill('0')
        << perms
        << endl;
-  
+
   return EXIT_SUCCESS;
   
 } // main

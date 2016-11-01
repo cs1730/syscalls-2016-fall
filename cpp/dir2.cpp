@@ -16,18 +16,18 @@ using std::string;
 void print_dir(const char * dirname, int level = 0);
 
 int main(const int argc, const char * argv []) {
-  cout.setf(std::ios::unitbuf);   // turn off buffering for cout
-  const char * dirname = argv[1]; // get dir name from program argument
-  print_dir(dirname);             // print out the directory
+  cout.setf(std::ios::unitbuf);       // turn off buffering for cout
+  const char * dirname = argv[1];     // get dir name from program argument
+  print_dir(dirname);                 // print out the directory
   return EXIT_SUCCESS;
 } // main
 
 // @TODO probably should handle errors better
 void print_dir(const char * dirname, int level) {
 
-  DIR * dirp = nullptr;
-  struct dirent * direntp = nullptr;
-  char subdirname [PATH_MAX];
+  DIR * dirp = nullptr;               // directory pointer
+  struct dirent * direntp = nullptr;  // directory entry pointer
+  char subdirname [PATH_MAX];         // subdirectory name
 
   if ((dirp = opendir(dirname)) == nullptr) nope_out("opendir");
 
@@ -41,9 +41,9 @@ void print_dir(const char * dirname, int level) {
       if (direntp->d_type == DT_DIR) {
 	for (int i = 0; i < level; ++i) cout << "  ";
 	cout << "   \\" << endl;
-	strcpy(subdirname, dirname);
-	strcat(subdirname, "/");
-	strcat(subdirname, ename);
+	strcpy(subdirname, dirname);  // make a copy of dirname
+	strcat(subdirname, "/");      // append "/"
+	strcat(subdirname, ename);    // append entry name
 	print_dir(subdirname, level + 1);
       } // if
       

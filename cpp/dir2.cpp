@@ -1,17 +1,12 @@
 
-#include <ios>
 #include <iostream>
-#include <string>
 #include <cstdlib>
-#include <climits>
-#include <sys/types.h>
 #include <dirent.h>
 #include <unistd.h>
 #include "nope.h"
 
 using std::cout;
 using std::endl;
-using std::string;
 
 void print_dir(const char * dirname, int level = 0);
 

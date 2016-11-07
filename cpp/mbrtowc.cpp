@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 const size_t BUFFSIZE = 1024;
+//const size_t BUFFSIZE = 8;
 
 // @see http://en.cppreference.com/w/cpp/string/multibyte/mbrtowc
 int main(const int argc, const char * argv []) {
@@ -13,24 +14,23 @@ int main(const int argc, const char * argv []) {
   const char * filename = argv[1];             // filename
   char buffer [BUFFSIZE];                      // read buffer
   int fd = open(filename, O_RDONLY);           // file descriptor
-  int nbytes = 0;                              // # bytes read
-  int chars = 0;                               // # characters read
+  size_t nbytes = 0;                           // # bytes read
+  size_t nchars = 0;                           // # characters read
   while ((nbytes = read(fd, buffer, BUFFSIZE)) > 0) {
     std::mbstate_t state = std::mbstate_t();   // initialize state
-    char * ptr = buffer;                       // start of sliding window
-    const char * end = ptr + std::strlen(ptr); // end of sliding window
-    int len = 0;                               // # bytes processed
+    size_t len = 0;                            // # bytes processed
     wchar_t wc = '\0';                         // multibyte character
-    while((len = std::mbrtowc(&wc, ptr, end-ptr, &state)) > 0) {
+    size_t sum = 0;                            // sum # bytes processed
+    while((len = std::mbrtowc(&wc, buffer+sum, nbytes-sum, &state)) > 0) {
+      if (len == (size_t) -2) break;           // incomplete wchar
       std::wcout << "Next " << len << " bytes are the character " << wc << std::endl;
-      ptr += len;                              // move onto the next one
-      chars += 1;                              // increment character count
-      if (ptr > end) break;                    // don't go past the end
+      sum    += len;                           // accumulate sum
+      nchars += 1;                             // increment character count
     } // while
-    // @TODO What if we're in the middle of a character at the end of this read?
-    // @TODO What if the string is bigger than the buffer? i.e., maybe no '\0'?
+    // handle incomplete wchar at end of buffer by seeking back a little
+    if (sum < nbytes) lseek(fd, sum-nbytes, SEEK_CUR);
   } // while
-  std::wcout << "# chars = " << chars << std::endl;
+  std::wcout << "nchars = " << nchars << std::endl;
   close(fd);
 } // main
 

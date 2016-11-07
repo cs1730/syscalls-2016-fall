@@ -28,6 +28,7 @@ int main(const int argc, const char * argv []) {
       if (ptr > end) break;                    // don't go past the end
     } // while
     // @TODO What if we're in the middle of a character at the end of this read?
+    // @TODO What if the string is bigger than the buffer? i.e., maybe no '\0'?
   } // while
   std::wcout << "# chars = " << chars << std::endl;
   close(fd);

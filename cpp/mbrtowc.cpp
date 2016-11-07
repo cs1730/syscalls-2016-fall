@@ -18,8 +18,8 @@ int main(const int argc, const char * argv []) {
     std::mbstate_t state = std::mbstate_t();  // initialize state
     char * ptr = buffer;                      // start of sliding window
     const char* end = ptr + std::strlen(ptr); // end of sliding window
-    int len;                                  // # bytes processed
-    wchar_t wc;                               // multibyte character
+    int len = 0;                              // # bytes processed
+    wchar_t wc = '\0';                        // multibyte character
     while((len = std::mbrtowc(&wc, ptr, end-ptr, &state)) > 0) {
       std::wcout << "Next " << len << " bytes are the character " << wc << std::endl;
       ptr += len;                             // move onto the next one

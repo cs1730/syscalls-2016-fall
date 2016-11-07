@@ -7,6 +7,7 @@
 
 const size_t BUFFSIZE = 1024;
 
+// @see http://en.cppreference.com/w/cpp/string/multibyte/mbrtowc
 int main(const int argc, const char * argv []) {
   std::setlocale(LC_ALL, "en_US.utf8");        // enable unicode
   const char * filename = argv[1];             // filename

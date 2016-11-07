@@ -26,6 +26,7 @@ int main(const int argc, const char * argv []) {
       chars += 1;                             // increment character count
       if (ptr > end) break;                   // don't go past the end
     } // while
+    // @TODO What if we're in the middle of a character at the end of this read?
   } // while
   std::wcout << "# chars = " << chars << std::endl;
   close(fd);

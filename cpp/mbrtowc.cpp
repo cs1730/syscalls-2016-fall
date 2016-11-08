@@ -13,13 +13,13 @@ int main(const int argc, const char * argv []) {
   std::setlocale(LC_ALL, "en_US.utf8");        // enable unicode
   const char * filename = argv[1];             // filename
   char buffer [BUFFSIZE];                      // read buffer
-  int fd = open(filename, O_RDONLY);           // file descriptor
+  int fd = (argc == 1) ? STDIN_FILENO : open(filename, O_RDONLY);
   size_t nbytes = 0;                           // # bytes read
   size_t nchars = 0;                           // # characters read
   while ((nbytes = read(fd, buffer, BUFFSIZE)) > 0) {
     std::mbstate_t state = std::mbstate_t();   // initialize state
     size_t len = 0;                            // # bytes processed
-    wchar_t wc = '\0';                         // multibyte character
+    wchar_t wc = 0;                            // multibyte character
     size_t sum = 0;                            // sum # bytes processed
     while((len = std::mbrtowc(&wc, buffer+sum, nbytes-sum, &state)) > 0) {
       if (len == (size_t) -2) break;           // incomplete wchar

@@ -11,11 +11,7 @@ void my_handler(int signo) {
 } // my_handler
 
 int main() {
-  //signal(SIGINT, (void (*)(int)) 42);
-  signal(SIGINT, my_handler);
-  // sighandler_t old_handler = signal(SIGINT, SIG_IGN);
-  //  signal(SIGINT, old_handler);
-  // signal(SIGINT, SIG_DFL);
+  // TODO setup signal handler for SIGINT (Interrupt Signal)
   while (true);
   return EXIT_SUCCESS;
 } // main

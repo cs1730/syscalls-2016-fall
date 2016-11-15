@@ -1,18 +1,15 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 #include <signal.h>
 
 using std::cout;
 using std::endl;
 
-void my_handler(int signo) {
-  cout << "NOPE!!" << endl;
-} // my_handler
-
 int main() {
   // TODO setup signal handler for SIGINT (Interrupt Signal)
-  while (true);
+  while (true) pause(); // wait for signal
   return EXIT_SUCCESS;
 } // main
 

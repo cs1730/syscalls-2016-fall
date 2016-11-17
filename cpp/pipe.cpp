@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "nope.h"
 
 using namespace std;
 
@@ -17,18 +18,16 @@ int main(const int argc, const char * argv []) {
 
   // create pipe
   if (pipe(pipefd) == -1) {
-    perror("pipe");
-    exit(EXIT_FAILURE);
+    nope_out("pipe");
   } // if
 
+  // create first child
   if ((pid = fork()) == -1) {
-    perror("fork");
-    exit(EXIT_FAILURE);
+    nope_out("fork");
   } else if (pid == 0) {
 
     if (dup2(pipefd[1], STDOUT_FILENO) == -1) {
-      perror("dup2");
-      exit(EXIT_FAILURE);
+      nope_out("dup2");
     } // if
 
     close_pipe(pipefd);
@@ -47,14 +46,13 @@ int main(const int argc, const char * argv []) {
 
   } // if
 
+  // create second child
   if ((pid = fork()) == -1) {
-    perror("fork");
-    exit(EXIT_FAILURE);
+    nope_out("fork");
   } else if (pid == 0) {
 
     if (dup2(pipefd[0], STDIN_FILENO) == -1) {
-      perror("dup2");
-      exit(EXIT_FAILURE);
+      nope_out("dup2");
     } // if
 
     close_pipe(pipefd);
@@ -74,6 +72,7 @@ int main(const int argc, const char * argv []) {
 
   close_pipe(pipefd);
 
+  // wait on last child
   waitpid(pid, nullptr, 0);
   return EXIT_SUCCESS;
 

@@ -41,7 +41,7 @@ int main(const int argc, const char * argv []) {
     execvp(args[0], args);
     
     perror("execvp");
-    for (int i = 0; i < 3; ++i) delete[] args[i];
+    for (int i = 0; i < 3; ++i) free(args[i]);
     delete[] args;
     exit(EXIT_FAILURE);
 
@@ -66,7 +66,7 @@ int main(const int argc, const char * argv []) {
     execvp(args[0], args);
     
     perror("execvp");
-    for (int i = 0; i < 2; ++i) delete[] args[i];
+    for (int i = 0; i < 2; ++i) free(args[i]);
     delete[] args;
     exit(EXIT_FAILURE);
 

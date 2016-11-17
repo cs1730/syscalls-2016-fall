@@ -34,10 +34,8 @@ int main(const int argc, const char * argv []) {
     close_pipe(pipefd);
 
     char ** args = new char * [3];
-    args[0] = new char [4];
-    strcpy(args[0], "cat");
-    args[1] = new char [9];
-    strcpy(args[1], "pipe.cpp");
+    args[0] = strdup("cat");
+    args[1] = strdup("pipe.cpp");
     args[2] = nullptr;
 
     execvp(args[0], args);
@@ -62,8 +60,7 @@ int main(const int argc, const char * argv []) {
     close_pipe(pipefd);
 
     char ** args = new char * [2];
-    args[0] = new char [5];
-    strcpy(args[0], "less");
+    args[0] = strdup("less");
     args[1] = nullptr;
 
     execvp(args[0], args);

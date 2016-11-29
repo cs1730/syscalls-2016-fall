@@ -46,6 +46,11 @@ int main(const int argc, const char * argv []) {
   // standard out will become a duplicate of ofd
   if (dup2(ofd, STDOUT_FILENO) == -1) nope_out("dup2");
 
+  // alternative to dup2...
+  // close(STDOUT_FILENO);
+  // STDOUT_FILENO = dup(ofd);
+  
+
   // print to ofd's file
   cout << "after dup2" << endl;
 
